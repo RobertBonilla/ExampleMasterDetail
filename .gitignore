@@ -1,0 +1,4 @@
+#Archivos a ignorar
+App/WebApp/WebApp.Api/bin
+App/WebApp/WebApp.Api/obj
+App/WebApp/.vs
