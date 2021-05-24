@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Core.Interfaces;
+using WebApp.Core.UserCase;
+using WebApp.Infraestructure.Repository;
 
 namespace WebApp.Api
 {
@@ -25,6 +28,8 @@ namespace WebApp.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<IListaUserCase,ListaUserCase>();
+            services.AddTransient<IListaRepository, ListaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

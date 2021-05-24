@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "WebApp.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/WebApp.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApp.Core.dll": {}
+        }
+      },
+      "WebApp.Infraestructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "WebApp.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/WebApp.Infraestructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApp.Infraestructure.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "WebApp.Core/1.0.0": {
+      "type": "project",
+      "path": "../WebApp.Core/WebApp.Core.csproj",
+      "msbuildProject": "../WebApp.Core/WebApp.Core.csproj"
+    },
+    "WebApp.Infraestructure/1.0.0": {
+      "type": "project",
+      "path": "../WebApp.Infraestructure/WebApp.Infraestructure.csproj",
+      "msbuildProject": "../WebApp.Infraestructure/WebApp.Infraestructure.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "WebApp.Core >= 1.0.0",
+      "WebApp.Infraestructure >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\crobe\\.nuget\\packages\\": {},
@@ -40,7 +78,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\crobe\\Documents\\GIT\\ExampleMasterDetail\\App\\WebApp\\WebApp.Core\\WebApp.Core.csproj": {
+              "projectPath": "C:\\Users\\crobe\\Documents\\GIT\\ExampleMasterDetail\\App\\WebApp\\WebApp.Core\\WebApp.Core.csproj"
+            },
+            "C:\\Users\\crobe\\Documents\\GIT\\ExampleMasterDetail\\App\\WebApp\\WebApp.Infraestructure\\WebApp.Infraestructure.csproj": {
+              "projectPath": "C:\\Users\\crobe\\Documents\\GIT\\ExampleMasterDetail\\App\\WebApp\\WebApp.Infraestructure\\WebApp.Infraestructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

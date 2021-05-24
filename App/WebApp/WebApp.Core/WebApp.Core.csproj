@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
     <Folder Include="Dto\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="UserCase\" />
   </ItemGroup>
 
 </Project>

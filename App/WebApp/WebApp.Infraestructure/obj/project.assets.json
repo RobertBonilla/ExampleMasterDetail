@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "WebApp.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/WebApp.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApp.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "WebApp.Core/1.0.0": {
+      "type": "project",
+      "path": "../WebApp.Core/WebApp.Core.csproj",
+      "msbuildProject": "../WebApp.Core/WebApp.Core.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "WebApp.Core >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\crobe\\.nuget\\packages\\": {},
@@ -40,7 +59,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\crobe\\Documents\\GIT\\ExampleMasterDetail\\App\\WebApp\\WebApp.Core\\WebApp.Core.csproj": {
+              "projectPath": "C:\\Users\\crobe\\Documents\\GIT\\ExampleMasterDetail\\App\\WebApp\\WebApp.Core\\WebApp.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
