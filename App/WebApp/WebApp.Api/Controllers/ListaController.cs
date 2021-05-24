@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Core.Interfaces;
+using WebApp.Api.Commond.Responses;
+using WebApp.Core.Domain;
+using System.Net;
 
 namespace WebApp.Api.Controllers
 {
@@ -17,10 +20,14 @@ namespace WebApp.Api.Controllers
             _userCase = (userCase != null) ? userCase : throw new ArgumentNullException(nameof(userCase));
         }
         [HttpGet("GetLista")]
-        public string GetLista()
+        public GenericListResponse<Lista> GetLista()
         {
-            var objeto = _userCase.ObtenerLista();
-            return "Hola Mundo";
+            GenericListResponse<Lista> reponse;
+            reponse = new GenericListResponse<Lista>() {
+                //Status = HttpStatusCode.OK,
+                Items = _userCase.ObtenerLista()
+            };
+            return reponse;
         }
     }
 }
