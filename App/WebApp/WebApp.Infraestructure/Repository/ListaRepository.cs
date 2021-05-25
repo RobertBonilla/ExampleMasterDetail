@@ -17,6 +17,48 @@ namespace WebApp.Infraestructure.Repository
             _configuration = (configuration != null) ? configuration : throw new ArgumentNullException(nameof(configuration));
         }
 
+        public Lista GetLista(Lista model)
+        {
+            Lista newModel = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    string query = "SELECT listaId,fechaCreacion,fechaUpdate,descripcion FROM Lista WHERE listaId = @listaId";
+                    con.Open();
+                    using (SqlTransaction sqlTran = con.BeginTransaction())
+                    {
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.Transaction = sqlTran;
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("listaId", model.ListaId);
+                            using (SqlDataReader sdr = cmd.ExecuteReader())
+                            {
+                                while (sdr.Read())
+                                {
+                                    newModel = new Lista()
+                                    {
+                                        ListaId = (sdr["listaId"] != null) ? int.Parse(sdr["listaId"].ToString()) : 0,
+                                        FechaCreacion = (sdr["fechaCreacion"] != null) ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
+                                        FechaUpdate = (sdr["fechaUpdate"] != null) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
+                                        Descripcion = sdr["descripcion"].ToString()
+                                    });
+                                }
+                            }
+                            sqlTran.Commit();
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.ToString());
+            }
+            return newModel;
+        }
+
         public Lista InsertarLista(Lista model)
         {
             Lista newModel = null;

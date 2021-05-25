@@ -15,14 +15,27 @@ namespace WebApp.Core.UserCase
             _repository = (repository != null) ? repository : throw new ArgumentException(nameof(repository));
         }
 
+        public Lista GetLista(Lista model)
+        {
+            return _repository.GetLista(model);
+        }
+
         public Lista InsertarLista(Lista model)
         {
-            return _repository.InsertarLista(model);
+            if(model!=null && model.Descripcion!=null)
+            {
+                return _repository.InsertarLista(model);
+            }
+            throw new ArgumentNullException("datos incompletos");
         }
 
         public Lista ModificarLista(Lista model)
         {
-            return _repository.ModificarLista(model);
+            if (model != null && model.ListaId>0 && model.Descripcion != null)
+            {
+                return _repository.InsertarLista(model);
+            }
+            throw new ArgumentNullException("datos incompletos");
         }
 
         public IEnumerable<Lista> ObtenerLista()
