@@ -21,8 +21,8 @@ namespace WebApp.Api.Controllers
             _userCase = (userCase != null) ? userCase : throw new ArgumentNullException(nameof(userCase));
         }
 
-        [HttpGet("Get")]
-        public GenericResponse<ListaItems> Get(Lista model)
+        [HttpGet("{ListaId}")]
+        public GenericResponse<ListaItems> Get(int ListaId)
         {
             GenericResponse<ListaItems> reponse;
             try
@@ -30,7 +30,7 @@ namespace WebApp.Api.Controllers
                 reponse = new GenericResponse<ListaItems>()
                 {
                     Status = new ResponseStatus() { HttpCode = HttpStatusCode.OK },
-                    Item = _userCase.getListaProductos(model)
+                    Item = _userCase.getListaProductos(new Lista() { ListaId = ListaId })
                 };
             }
             catch (Exception ex)
