@@ -8,7 +8,7 @@ namespace WebApp.Core.Domain
     {
         public int ProductoId { get; set; }
         public string Nombre { get; set; }
-        public string descripcion { get; set; }
-        public decimal valor { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Valor { get; set; }
     }
 }
