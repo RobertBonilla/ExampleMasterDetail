@@ -9,5 +9,6 @@ namespace WebApp.Core.Interfaces
     {
         IEnumerable<Lista> ObtenerLista();
         Lista ModificarLista(Lista model);
+        Lista InsertarLista(Lista model);
     }
 }

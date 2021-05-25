@@ -30,19 +30,23 @@ namespace WebApp.Api
         {
             services.AddControllers();
             services.AddTransient<IListaUserCase,ListaUserCase>();
+            services.AddTransient<IProductoUserCase, ProductoUserCase>();
+            services.AddTransient<IDetListaUserCase, DetListaUserCase>();
             services.AddTransient<IListaRepository, ListaRepository>();
+            services.AddTransient<IProductoRepository, ProductoRepository>();
+            services.AddTransient<IDetListaRepository, DetListaRepository>();
             services.AddSwaggerGen(options => {
                 var groupName = "v1";
                 options.SwaggerDoc(groupName, new OpenApiInfo
                 {
-                    Title = $"Foo {groupName}",
+                    Title = $"Api NetCore {groupName}",
                     Version = groupName,
-                    Description = "Foo API",
+                    Description = "NetCore API",
                     Contact = new OpenApiContact
                     {
-                        Name = "Foo Company",
+                        Name = "Roberto Bonilla",
                         Email = string.Empty,
-                        Url = new Uri("https://foo.com/"),
+                        Url = new Uri("https://github.com/RobertBonilla"),
                     }
                 });
             });

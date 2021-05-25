@@ -12,10 +12,41 @@ namespace WebApp.Infraestructure.Repository
     public class ListaRepository : IListaRepository
     {
         private readonly IConfiguration _configuration;
-        private string _conecctioString;
         public ListaRepository(IConfiguration configuration)
         {
             _configuration = (configuration != null) ? configuration : throw new ArgumentNullException(nameof(configuration));
+        }
+
+        public Lista InsertarLista(Lista model)
+        {
+            Lista newModel = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    con.Open();
+                    using (SqlTransaction sqlTran = con.BeginTransaction())
+                    {
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandText = "insertList";
+                            cmd.Transaction = sqlTran;
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("descripcion", model.Descripcion);
+                            int result = cmd.ExecuteNonQuery();
+                            sqlTran.Commit();
+                            newModel = model;
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.ToString());
+            }
+            return newModel;
         }
 
         public Lista ModificarLista(Lista model)
