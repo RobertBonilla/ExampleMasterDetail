@@ -43,7 +43,7 @@ namespace WebApp.Infraestructure.Repository
                                         FechaCreacion = (sdr["fechaCreacion"] != null) ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
                                         FechaUpdate = (sdr["fechaUpdate"] != null) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
                                         Descripcion = sdr["descripcion"].ToString()
-                                    });
+                                    };
                                 }
                             }
                             sqlTran.Commit();
