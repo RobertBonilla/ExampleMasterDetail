@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using WebApp.Core.Domain;
@@ -16,32 +17,78 @@ namespace WebApp.Infraestructure.Repository
         {
             _configuration = (configuration != null) ? configuration : throw new ArgumentNullException(nameof(configuration));
         }
-        public IEnumerable<Lista> ObtenerLista()
+
+        public Lista ModificarLista(Lista model)
         {
-            List<Lista> list = new List<Lista>();
-            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            Lista newModel = null;
+            try
             {
-                string query = "SELECT listaId,fechaCreacion,fechaUpdate,descripcion FROM Lista";
-                using (SqlCommand cmd = new SqlCommand(query))
+                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
-                    cmd.Connection = con;
                     con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
+                    using (SqlTransaction sqlTran = con.BeginTransaction())
+                    {                        
+                        using (SqlCommand cmd = new SqlCommand())
                         {
-                            list.Add(new Lista()
-                            {
-                                ListaId = (sdr["listaId"] !=null )? int.Parse(sdr["listaId"].ToString()) : 0,
-                                FechaCreacion = (sdr["fechaCreacion"] != null) ? DateTime.Parse(sdr["fechaCreacion"].ToString()):DateTime.MinValue,
-                                FechaUpdate = (sdr["fechaUpdate"] != null) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
-                                Descripcion = sdr["descripcion"].ToString()
-                            });
-                        }
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandText = "updateList";
+                            cmd.Transaction = sqlTran;
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("descripcion", model.Descripcion);
+                            cmd.Parameters.AddWithValue("listaId", model.ListaId);                            
+                            int result = cmd.ExecuteNonQuery();
+                            sqlTran.Commit();                            
+                            newModel = model;
+                        }                        
                     }
                     con.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.ToString());
+            }            
+            return newModel;
+        }
+
+        public IEnumerable<Lista> ObtenerLista()
+        {
+            List<Lista> list = new List<Lista>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    string query = "SELECT listaId,fechaCreacion,fechaUpdate,descripcion FROM Lista";
+                    con.Open();
+                    using (SqlTransaction sqlTran = con.BeginTransaction())
+                    {                        
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.Transaction = sqlTran;
+                            cmd.Connection = con;                            
+                            using (SqlDataReader sdr = cmd.ExecuteReader())
+                            {
+                                while (sdr.Read())
+                                {
+                                    list.Add(new Lista()
+                                    {
+                                        ListaId = (sdr["listaId"] != null) ? int.Parse(sdr["listaId"].ToString()) : 0,
+                                        FechaCreacion = (sdr["fechaCreacion"] != null) ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
+                                        FechaUpdate = (sdr["fechaUpdate"] != null) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
+                                        Descripcion = sdr["descripcion"].ToString()
+                                    });
+                                }
+                            }
+                            sqlTran.Commit();                            
+                        }                        
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.ToString());
+            }            
             return list;
         }
     }

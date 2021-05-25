@@ -8,6 +8,7 @@ namespace WebApp.Core.Interfaces
     public interface IListaRepository
     {
         IEnumerable<Lista> ObtenerLista();
+        Lista ModificarLista(Lista model);
 
     }
 }

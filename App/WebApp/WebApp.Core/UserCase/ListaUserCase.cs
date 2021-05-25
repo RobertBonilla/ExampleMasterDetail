@@ -14,6 +14,12 @@ namespace WebApp.Core.UserCase
         {
             _repository = (repository != null) ? repository : throw new ArgumentException(nameof(repository));
         }
+
+        public Lista ModificarLista(Lista model)
+        {
+            return _repository.ModificarLista(model);
+        }
+
         public IEnumerable<Lista> ObtenerLista()
         {
             return _repository.ObtenerLista();
