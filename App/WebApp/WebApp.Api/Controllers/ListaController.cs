@@ -23,10 +23,22 @@ namespace WebApp.Api.Controllers
         public GenericListResponse<Lista> GetLista()
         {
             GenericListResponse<Lista> reponse;
-            reponse = new GenericListResponse<Lista>() {
-                //Status = HttpStatusCode.OK,
-                Items = _userCase.ObtenerLista()
-            };
+            try
+            {
+                reponse = new GenericListResponse<Lista>()
+                {
+                    Status = new ResponseStatus() { HttpCode = HttpStatusCode.OK },
+                    Items = _userCase.ObtenerLista()
+                };
+            }
+            catch (Exception ex)
+            {
+                reponse = new GenericListResponse<Lista>()
+                {
+                    Status = new ResponseStatus()
+                    { HttpCode = HttpStatusCode.InternalServerError,Message = ex.ToString() }
+                };
+            }            
             return reponse;
         }
     }
