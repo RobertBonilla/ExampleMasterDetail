@@ -21,7 +21,7 @@ namespace WebApp.Api.Controllers
             _userCase = (userCase != null) ? userCase : throw new ArgumentNullException(nameof(userCase));
         }
 
-        [HttpGet("{ListaId}")]
+        [HttpGet("Get")]
         public GenericResponse<ListaItems> Get(int ListaId)
         {
             GenericResponse<ListaItems> reponse;

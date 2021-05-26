@@ -1,25 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Lista [Detalle]";
+    WebApp.Frontend.Models.Dto.ListaItems data = (WebApp.Frontend.Models.Dto.ListaItems)ViewData["ListaModel"];
+    WebApp.Frontend.Models.Domain.Lista dataLista = data.Lista;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Lista</h1>
+    <h1 class="display-4">Detalle de Lista</h1>
 </div>
 <div>
     <form>
         <div class="mb-3">
             <label for="fechaCreacion" class="form-label">Creaccion</label>
-            <label id="fechaCreacion">20-05-2021</label>
+            <label id="fechaCreacion">@dataLista.FechaCreacion</label>
         </div>
         <div class="mb-3">
             <label for="fechaUpdate" class="form-label">Modificacion</label>
-            <label id="fechaUpdate">20-05-2021</label>
+            <label id="fechaUpdate">@dataLista.FechaUpdate</label>
         </div>
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripcion</label>
-            <input type="text" class="form-control" id="descripcion" aria-describedby="Descripcion">
+            <input type="text" class="form-control" id="descripcion" aria-describedby="Descripcion" readonly value="@dataLista.Descripcion">
         </div>
-        <a class="btn btn-primary" href="/">Regresar</a>
+        <a class="btn btn-secondary" href="/">Regresar</a>
     </form>
 </div>
 <div>
@@ -34,15 +36,62 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="table-active">
-                <td>Arroz</td>
-                <td>1</td>
-                <td>2</td>
-                <td>2</td>
-                <td>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                </td>
-            </tr>
+            @foreach (var ListaModel in data.Items)
+            {
+        <tr>
+            <td>@ListaModel.Producto.Nombre</td>
+            <td>@ListaModel.detLista.ValorUnitario</td>
+            <td>@ListaModel.detLista.Cantidad</td>
+            <td>@ListaModel.detLista.SubTotal</td>
+            <td>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="Eliminar(@ListaModel.detLista.DetListaId);">Eliminar</button>
+            </td>
+        </tr>
+            }
         </tbody>
     </table>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CONFIRMACION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ESTA SEGURO QUE DESEA ELIMINAR EL REGISTRO?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="EliminarRegistro();">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var idEliminar = 0;
+    function Eliminar(id) {
+        idEliminar = id;
+    }
+    function EliminarRegistro() {
+        var urlGetLista = '@Url.Action("EliminarDetalle", "Lista")';
+        console.log("Ejecutando");
+        $.ajax({
+            url: urlGetLista,
+            type: 'POST',
+            data: { id: idEliminar},
+            success: function (result) {
+                console.log(result);
+                alert("Datos Eliminados con Exito");
+                location.reload();
+            },
+            error: function (httpResponse, e) {
+                alert("Error en el proceso");
+            },
+            complete: function (result) {
+            }
+        });
+    }
+</script>

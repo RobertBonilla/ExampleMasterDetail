@@ -80,7 +80,8 @@ namespace WebApp.Infraestructure.Repository
                                             ListaId = (sdr["listaId"] != null) ? int.Parse(sdr["listaId"].ToString()) : 0,
                                             ProductoId = (sdr["productoId"] != null) ? int.Parse(sdr["productoId"].ToString()) : 0,
                                             Cantidad = (sdr["cantidad"] != null) ? int.Parse(sdr["cantidad"].ToString()) : 0,
-                                            ValorUnitario = (sdr["valorUnitario"] != null) ? decimal.Parse(sdr["valorUnitario"].ToString()) : 0
+                                            ValorUnitario = (sdr["valorUnitario"] != null) ? decimal.Parse(sdr["valorUnitario"].ToString()) : 0,
+                                            SubTotal = (sdr["subTotal"] != null) ? decimal.Parse(sdr["subTotal"].ToString()) : 0
                                         },
                                         Producto = new Producto()
                                         {

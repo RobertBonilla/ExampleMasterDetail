@@ -42,6 +42,29 @@ namespace WebApp.Api.Controllers
             return reponse;
         }
 
+        [HttpGet("GetListaModel")]
+        public GenericResponse<Lista> GetListaModel(int id)
+        {
+            GenericResponse<Lista> reponse;
+            try
+            {
+                reponse = new GenericResponse<Lista>()
+                {
+                    Status = new ResponseStatus() { HttpCode = HttpStatusCode.OK },
+                    Item = _userCase.GetLista(new Lista() { ListaId = id })
+                };
+            }
+            catch (Exception ex)
+            {
+                reponse = new GenericResponse<Lista>()
+                {
+                    Status = new ResponseStatus()
+                    { HttpCode = HttpStatusCode.InternalServerError, Message = ex.ToString() }
+                };
+            }
+            return reponse;
+        }
+
         [HttpPost("modificarLista")]
         public GenericResponse<Lista> modificarLista(Lista model)
         {

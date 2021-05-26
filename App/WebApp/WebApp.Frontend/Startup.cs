@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Frontend.Rest;
+using WebApp.Frontend.Rest.Interfaces;
 
 namespace WebApp.Frontend
 {
@@ -23,6 +25,7 @@ namespace WebApp.Frontend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IApiRest, ApiRest>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

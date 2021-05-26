@@ -36,3 +36,4 @@ C:\Users\crobe\Documents\GIT\ExampleMasterDetail\App\WebApp\WebApp.Frontend\obj\
 C:\Users\crobe\Documents\GIT\ExampleMasterDetail\App\WebApp\WebApp.Frontend\obj\Debug\netcoreapp3.1\Razor\Views\Lista\Index.cshtml.g.cs
 C:\Users\crobe\Documents\GIT\ExampleMasterDetail\App\WebApp\WebApp.Frontend\obj\Debug\netcoreapp3.1\Razor\Views\Lista\Detail.cshtml.g.cs
 C:\Users\crobe\Documents\GIT\ExampleMasterDetail\App\WebApp\WebApp.Frontend\obj\Debug\netcoreapp3.1\Razor\Views\Lista\Edit.cshtml.g.cs
+C:\Users\crobe\Documents\GIT\ExampleMasterDetail\App\WebApp\WebApp.Frontend\bin\Debug\netcoreapp3.1\RestSharp.dll
