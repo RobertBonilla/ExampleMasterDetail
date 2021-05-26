@@ -40,8 +40,8 @@ namespace WebApp.Infraestructure.Repository
                                     newModel = new Lista()
                                     {
                                         ListaId = (sdr["listaId"] != null) ? int.Parse(sdr["listaId"].ToString()) : 0,
-                                        FechaCreacion = (sdr["fechaCreacion"] != null) ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
-                                        FechaUpdate = (sdr["fechaUpdate"] != null) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
+                                        FechaCreacion = (sdr["fechaCreacion"] != null && !sdr["fechaCreacion"].ToString().Equals("")) ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
+                                        FechaUpdate = (sdr["fechaUpdate"] != null && !sdr["fechaUpdate"].ToString().Equals("")) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
                                         Descripcion = sdr["descripcion"].ToString()
                                     };
                                 }
@@ -146,8 +146,8 @@ namespace WebApp.Infraestructure.Repository
                                     list.Add(new Lista()
                                     {
                                         ListaId = (sdr["listaId"] != null) ? int.Parse(sdr["listaId"].ToString()) : 0,
-                                        FechaCreacion = (sdr["fechaCreacion"] != null) ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
-                                        FechaUpdate = (sdr["fechaUpdate"] != null) ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
+                                        FechaCreacion = (sdr["fechaCreacion"] != null && sdr["fechaCreacion"].ToString() != "") ? DateTime.Parse(sdr["fechaCreacion"].ToString()) : DateTime.MinValue,
+                                        FechaUpdate = (sdr["fechaUpdate"] != null && sdr["fechaUpdate"].ToString() != "") ? DateTime.Parse(sdr["fechaUpdate"].ToString()) : DateTime.MinValue,
                                         Descripcion = sdr["descripcion"].ToString()
                                     });
                                 }

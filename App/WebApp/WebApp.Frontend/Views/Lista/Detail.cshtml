@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Lista [Detalle]";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Lista</h1>
+</div>
+<div>
+    <form>
+        <div class="mb-3">
+            <label for="fechaCreacion" class="form-label">Creaccion</label>
+            <label id="fechaCreacion">20-05-2021</label>
+        </div>
+        <div class="mb-3">
+            <label for="fechaUpdate" class="form-label">Modificacion</label>
+            <label id="fechaUpdate">20-05-2021</label>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" aria-describedby="Descripcion">
+        </div>
+        <a class="btn btn-primary" href="/">Regresar</a>
+    </form>
+</div>
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">SubTotal</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-active">
+                <td>Arroz</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

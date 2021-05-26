@@ -33,7 +33,7 @@ namespace WebApp.Core.UserCase
         {
             if (model != null && model.ListaId>0 && model.Descripcion != null)
             {
-                return _repository.InsertarLista(model);
+                return _repository.ModificarLista(model);
             }
             throw new ArgumentNullException("datos incompletos");
         }

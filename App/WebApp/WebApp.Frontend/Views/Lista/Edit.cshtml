@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Lista [Editar]";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Editar Lista</h1>
+</div>
+<div>
+    <form>
+        <div class="mb-3">
+            <label for="idLista" class="form-label">Codigo</label>
+            <input type="email" class="form-control" id="idLista" aria-describedby="Codigo" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="fechaCreacion" class="form-label">Creaccion</label>
+            <label id="fechaCreacion">20-05-2021</label>
+        </div>
+        <div class="mb-3">
+            <label for="fechaUpdate" class="form-label">Modificacion</label>
+            <label id="fechaUpdate">20-05-2021</label>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" aria-describedby="Descripcion">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-primary" href="/">Regresar</a>
+    </form>
+</div>

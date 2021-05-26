@@ -59,7 +59,7 @@ namespace WebApp.Infraestructure.Repository
                     string query = @"SELECT det.detListaId,det.listaId,det.productoId,det.valorUnitario,det.cantidad,det.subTotal,
                                     pro.nombre,pro.descripcion,pro.valor
                                     FROM detLista det
-                                    INNER JOIN Producto pro on det.productoId = pro.productoId";
+                                    INNER JOIN Producto pro on det.productoId = pro.productoId WHERE det.listaId = @listaId";
                     con.Open();
                     using (SqlTransaction sqlTran = con.BeginTransaction())
                     {
@@ -67,6 +67,7 @@ namespace WebApp.Infraestructure.Repository
                         {
                             cmd.Transaction = sqlTran;
                             cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("listaId", model.ListaId);
                             using (SqlDataReader sdr = cmd.ExecuteReader())
                             {
                                 while (sdr.Read())

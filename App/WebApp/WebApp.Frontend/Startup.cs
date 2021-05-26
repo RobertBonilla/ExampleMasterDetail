@@ -46,7 +46,7 @@ namespace WebApp.Frontend
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Lista}/{action=Index}/{id?}");
             });
         }
     }
