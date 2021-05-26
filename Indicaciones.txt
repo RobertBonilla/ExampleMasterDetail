@@ -1,0 +1,9 @@
+Ejemplo desarrollado en NetCore 3.1
+
+WebApp.Api
+-contiene Swagger para realizar pruebas
+-la coneccion a la base de datos se encuentra en el archivo [appsettings.json]
+
+WebApp.FrontEnd
+-aplicacion que consume API
+-la url de la Api se encuentra en el archivo [appsettings.json]
